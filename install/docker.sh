@@ -1,8 +1,6 @@
 #!/bin/bash
 
-####################
-#  INSTALL DOCKER  #
-####################
+# Ref: https://docs.docker.com/engine/install/ubuntu/
 
 # Install prerequisites
 sudo apt-get update
