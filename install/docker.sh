@@ -22,8 +22,10 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 sudo systemctl enable --now docker
 
 # Post-installation
+UNAME=${1:-$USER}
+
 sudo groupadd docker
-sudo usermod -aG docker $USER
+sudo usermod -aG docker $UNAME
 newgrp docker
-sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-sudo chmod g+rwx "$HOME/.docker" -R
+sudo chown "$UNAME":"$UNAME" /home/"$UNAME"/.docker -R
+sudo chmod g+rwx "/home/$UNAME/.docker" -R
