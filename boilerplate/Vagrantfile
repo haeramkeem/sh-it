@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |group|
+
+    Name = #{BOX_NAME}
+
+    group.vm.define Name do |instance|
+      instance.vm.box = "ubuntu/bionic64"
+      instance.vm.hostname = Name
+      instance.vm.network "private_network", ip: "192.168.56.100"
+      instance.vm.provision "shell", path: #{INITIATION_SCRIPT}
+      instance.vm.provider :virtualbox do |vb|
+        vb.name = Name
+        vb.cpus = 1
+        vb.memory = 1024
+      end
+    end
+   
+  end
