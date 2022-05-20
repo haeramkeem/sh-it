@@ -11,6 +11,13 @@ If you want to run a script without copying-pasting shit
 bash <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/path/to/script)
 ```
 
+If you want to `source` a script to use functions or something,
+just type:
+
+```bash
+source <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/path/to/script)
+```
+
 Or you can just look around the scripts I pushed in [here](https://gist.github.com/haeramkeem)
 
 ## RCs
@@ -21,7 +28,7 @@ Or you can just look around the scripts I pushed in [here](https://gist.github.c
 curl https://raw.githubusercontent.com/haeramkeem/sh-it/main/rcs/.vimrc > ~/.vimrc
 ```
 
-### Vim (no plugin option)
+To import minimum configuration (no vim-plugin setting), do:
 
 ```bash
 curl https://raw.githubusercontent.com/haeramkeem/sh-it/main/rcs/.min.vimrc > ~/.vimrc
