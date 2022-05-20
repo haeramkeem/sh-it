@@ -35,7 +35,7 @@ function save_img_from_yaml {
 
         fi
 
-        docker save $save_img > $dst_path/$img_name_only
+        docker save $save_img > $dst_path/$img_name_only.tar
         echo "Docker image $save_img saved to $dst_path"
 
     done

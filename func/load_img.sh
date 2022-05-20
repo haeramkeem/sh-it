@@ -8,26 +8,26 @@
 #   Example:
 #       $ load_image ./images example.harbor.domain --push
 function load_img {
-    local image_path=$1
-    local image_registry=$2
+    local img_path=$1
+    local img_registry=$2
     local is_push=$3
 
     for img_tar in $(ls $img_path/*.tar); do
 
-        image=$(sudo docker load < $image_tar \
+        image=$(sudo docker load < $img_tar \
             | sed –nr "s/Loaded image: (.+)/\1/gp")
         echo "Docker image ${image} loaded"
         
-        if [[ $imageRegi != "" ]]; then
+        if [[ $img_registry != "" ]]; then
 
-            conv_img_name="$image_registry/$(awk -F/ '{print $NF}' <<< ${img_name})"
+            conv_img_name="$img_registry/$(awk -F/ '{print $NF}' <<< ${img_name})"
             sudo docker tag $image $conv_img_name
             echo "Docker image ${image} tagged to ${conv_img_name}"
 
             if [[ $is_push == "--push" ]]; then
 
                 sudo docker push $conv_img_name
-                echo "Docker image ${conv_img_name} pushed to ${image_registry}"
+                echo "Docker image ${conv_img_name} pushed to ${img_registry}"
 
             fi
 
