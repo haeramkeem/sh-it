@@ -25,21 +25,18 @@ function save_img_from_yaml {
     for img_name in $img_list; do
 
         docker pull $img_name
+        save_img=$img_name
+        img_name_only=$(awk -F/ '{print $NF}' <<< ${img_name})
 
         if [[ $img_prefix != "" ]]; then
 
-            conv_img_name="$img_prefix/$(awk -F/ '{print $NF}' <<< ${img_name})"
-            docker tag $img_name $conv_img_name
-            docker save $conv_img_name > $dst_path/$img_name
-
-        else
-
-            docker save $img_name > $dst_path/$img_name
+            save_img="$img_prefix/$img_name_only"
+            docker tag $img_name $save_img
 
         fi
 
-        docker rmi $img_name $conv_img_name &> /dev/null
-        echo "Docker image $img_name saved to $dst_path"
+        docker save $save_img > $dst_path/$img_name_only
+        echo "Docker image $save_img saved to $dst_path"
 
     done
 }
