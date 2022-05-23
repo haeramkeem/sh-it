@@ -10,6 +10,7 @@
 function dl_deb_pkg {
     local pkgName=$1
     local dstPath=$2
+    local pwd=$(pwd)
 
     mkdir -pv $dstPath
     cd $dstPath
@@ -18,5 +19,5 @@ function dl_deb_pkg {
         --no-breaks --no-replaces --no-enhances --no-pre-depends ${pkgName} | \
         grep "^\w" | grep -v "i386")
 
-    cd $(dirname $0)
+    cd $pwd
 }
