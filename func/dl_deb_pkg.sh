@@ -2,22 +2,23 @@
 
 # download .deb from apt
 #   download the packages with all dependencies included from apt
-#       `grep -v "i386"` will discard all dependencies with i386 architecture
-#       ref: https://stackoverflow.com/a/45489718
+#       list of the package must be provided via STDIN
+#       ref: https://www.lesstif.com/lpt/apt-get-118096015.html
 #   usage:
-#       $1: package name (only one permitted)
-#       $2: package save directory path (mkdir if path not found)
+#       $1: package save directory path (mkdir if path not found)
+#   example:
+#       dl_deb_pkg ./pkgs <<< "git vim"
 function dl_deb_pkg {
-    local pkgName=$1
-    local dstPath=$2
+    local pkgName=$(cat -)
+    local dstPath=$1
     local pwd=$(pwd)
 
     mkdir -pv $dstPath
     cd $dstPath
 
-    apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests --no-conflicts \
-        --no-breaks --no-replaces --no-enhances --no-pre-depends ${pkgName} | \
-        grep "^\w" | grep -v "i386")
+    echo "Downloading ${pkgName}"
+    apt-get reinstall --download-only -y ${pkgName}
+    mv /var/cache/apt/archives/*.deb .
 
     cd $pwd
 }
