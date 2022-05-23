@@ -18,5 +18,5 @@ function dl_deb_pkg {
         --no-breaks --no-replaces --no-enhances --no-pre-depends ${pkgName} | \
         grep "^\w" | grep -v "i386")
 
-    cd ..
+    cd $(dirname $0)
 }
