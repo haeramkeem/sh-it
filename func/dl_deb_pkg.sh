@@ -17,6 +17,8 @@ function dl_deb_pkg {
     cd $dstPath
 
     echo "Downloading ${pkgName}"
+    # Emptying cache
+    rm -rf /var/cache/apt/archives/*.deb
     apt-get reinstall --download-only -y ${pkgName}
     mv /var/cache/apt/archives/*.deb .
 
