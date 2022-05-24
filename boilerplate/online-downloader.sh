@@ -37,5 +37,7 @@ source <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/func/s
 # FILL OUT THE 'AS YOU WANT's
 
 # FILL OUT THE 'install.sh' CONTENT
-cat <<EOF > $WORKDIR/install.sh
+touch $WORKDIR/install.sh
+chmod 711 $WORKDIR/install.sh
+cat <<EOF >> $WORKDIR/install.sh
 EOF
