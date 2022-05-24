@@ -8,7 +8,8 @@ Vagrant.configure("2") do |group|
     group.vm.define Name do |instance|
       instance.vm.box = "ubuntu/bionic64"
       instance.vm.hostname = Name
-      instance.vm.network "private_network", ip: "192.168.56.100"
+      #instance.vm.network "private_network", ip: "192.168.56.100"
+      cfg.vm.network "forwarded_port", guest: 22, host: 60010, auto_correct: true, id: "ssh"
       instance.vm.provision "shell", path: #{INITIATION_SCRIPT}
       instance.vm.provider :virtualbox do |vb|
         vb.name = Name
