@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function sort_pkg {
+function sort_installed_rpm {
     local WORKDIR=$(pwd)
 
     mkdir -pv $WORKDIR/installed_pkgs
