@@ -5,7 +5,12 @@
 # Ref: https://docs.docker.com/engine/install/centos/
 
 # ARGs
-VER=${1:+"-$1"}     # $1: Optional - docker version
+while getopts 'v:c' opt; do
+    case "$opt" in
+        v) VER=${OPTARG:+"-$OPTARG"} ;; # (OPTIONAL) - docker version
+        c) CONTAINERD="true" ;;         # Install containerd only
+    esac
+done
 
 # Uninstall old one
 sudo yum remove -y  docker \
@@ -23,12 +28,21 @@ sudo yum-config-manager \
                     --add-repo \
                     https://download.docker.com/linux/centos/docker-ce.repo
 
+# Install containerd
+if [[ $CONTAINERD == "true" ]]; then
+    sudo yum install containerd.io
+    sudo systemctl enable --now containerd.io
+    sudo systemctl restart containerd.io
+    exit 0
+fi
+
 # Install docker
 sudo yum install -y docker-ce$VER \
                     docker-ce-cli$VER \
                     containerd.io \
                     docker-compose-plugin
-sudo systemctl start docker
+sudo systemctl enable --now docker
+sudo systemctl restart docker
 
 # Post-installation
 if [[ $USER != "root" ]]; then
