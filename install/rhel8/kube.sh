@@ -15,7 +15,7 @@ sudo yum install -y epel-release
 # -------------------------
 # Install containerd if not installed
 if ! `ctr --version &> /dev/null`; then
-    bash <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/install/rhel8/docker.sh)
+    bash <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/install/rhel8/docker.sh) -c
 fi
 
 # Configurations
@@ -33,8 +33,6 @@ sudo mkdir -p /etc/containerd
 sudo containerd config default | sudo tee /etc/containerd/config.toml
 
 sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/g' \
-    /etc/containerd/config.toml
-sudo sed -i 's$sandbox_image = "k8s.gcr.io/pause:3.6"$sandbox_image = "k8s.gcr.io/pause:3.7"$g' \
     /etc/containerd/config.toml
 sudo systemctl restart containerd
 
@@ -67,12 +65,8 @@ sudo swapoff -a
 sudo sed -i.bak -r 's/(.+\s+swap\s+.+)/#\1/' /etc/fstab
 
 # - Configurations for CRICTL
-cat <<EOF | sudo tee -a /etc/crictl.yaml
-runtime-endpoint: unix:///var/run/containerd/containerd.sock
-image-endpoint: unix:///var/run/containerd/containerd.sock
-timeout: 2
-pull-image-on-create: false
-EOF
+sudo crictl config runtime-endpoint unix:///var/run/containerd/containerd.sock
+sudo crictl config image-endpoint unix:///var/run/containerd/containerd.sock
 
 # - Configure iptables for kubernetes-CRI
 cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
