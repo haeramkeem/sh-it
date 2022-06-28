@@ -30,7 +30,7 @@ sudo yum-config-manager \
 
 # Install containerd
 if [[ $CONTAINERD == "true" ]]; then
-    sudo yum install containerd.io
+    sudo yum install -y containerd.io
     sudo systemctl enable --now containerd.io
     sudo systemctl restart containerd.io
     exit 0
