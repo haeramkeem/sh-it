@@ -1,6 +1,8 @@
 # /etc/haproxy/haproxy.cfg
 # Simplest config template for HAProxy
 # Modify & copy it to the '/etc/haproxy/haproxy.cfg'
+# ${FE_PORT}:                   Frontend port
+# ${HTTP_HEALTHCHECK_URLPATH}:  HTTP health check url path
 
 #---------------------------------------------------------------------
 # Global settings
@@ -49,4 +51,5 @@ backend main_be
     mode tcp
     option ssl-hello-chk
     balance     roundrobin
-    server ${HOST1_ID} ${HOST1_ADDRESS}:${APISERVER_SRC_PORT} check
+    # server ${HOST1_ID} ${HOST1_ADDRESS}:${APISERVER_SRC_PORT} check
+    # ...
