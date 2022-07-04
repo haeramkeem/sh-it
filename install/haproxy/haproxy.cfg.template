@@ -3,6 +3,8 @@
 # Modify & copy it to the '/etc/haproxy/haproxy.cfg'
 # ${FE_PORT}:                   Frontend port
 # ${HTTP_HEALTHCHECK_URLPATH}:  HTTP health check url path
+# ${STAT_ADMIN_USERNAME}:       Username for the haproxy stats page
+# ${STAT_ADMIN_PASSWORD}:       Password for the haproxy stats page
 
 #---------------------------------------------------------------------
 # Global settings
@@ -32,6 +34,17 @@ defaults
     timeout server          20s
     timeout http-keep-alive 10s
     timeout check           10s
+
+#---------------------------------------------------------------------
+# stats page
+#---------------------------------------------------------------------
+frontend stats
+    bind *:8404
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+    stats admin if LOCALHOST
+    stats auth ${STAT_ADMIN_USERNAME}:${STAT_ADMIN_PASSWORD}
 
 #---------------------------------------------------------------------
 # frontend which proxys to the backend servers
