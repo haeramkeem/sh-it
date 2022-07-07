@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function exec_sql {
-    SQL=$(cat -)
+    SQL="$(cat -)"
 
     if [ -z "$DB_USERNAME" ]; then
         echo "Abort: DB_USERNAME not provided as env" 1>&2
@@ -25,5 +25,5 @@ function exec_sql {
 
     docker exec mariadb \
         mysql -u$DB_USERNAME -p$DB_PASSWORD $DB_DATABASE -e "$SQL" \
-        echo $SQL
+        && echo $SQL
 }
