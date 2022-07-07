@@ -26,6 +26,7 @@ function curl_post {
         -H "Content-Type: application/json" \
         -X POST \
         -v \
+        --max-time 10 \
         $URL
     echo ""
 }
