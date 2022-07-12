@@ -1,0 +1,10 @@
+[Unit]
+Description=Timerd Service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/timerd
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
