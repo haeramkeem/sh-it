@@ -17,7 +17,7 @@ while getopts 'v:o:a:' opt; do
 done
 
 # Install
-curl -LO https://get.helm.sh/helm-$VER-$OS-$ARCH.tar.gz -o helm.tar.gz
+curl -L https://get.helm.sh/helm-$VER-$OS-$ARCH.tar.gz -o helm.tar.gz
 tar -xzvf helm.tar.gz
 sudo mv $OS-$ARCH/helm $INSTALL_DIR/helm
 
