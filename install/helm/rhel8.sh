@@ -10,8 +10,9 @@ INSTALL_DIR="/usr/local/bin"
 while getopts 'v:o:a:' opt; do
     case "$opt" in
         v) VER=${OPTARG:+"-$OPTARG"} ;;     # (OPTIONAL) - Helm version
-        o) OS=${OPTARG:+"-$OPTARG"} ;;      # (OPTIONAL) - OS name
-        a) ARCH=${OPTARG:+"-$OPTARG"} ;;    # (OPTIONAL) - Arch
+        o) OS=${OPTARG} ;;                  # (OPTIONAL) - OS name
+        a) ARCH=${OPTARG} ;;                # (OPTIONAL) - Arch
+        i) INSTALL_DIR=${OPTARG} ;;         # (OPTIONAL) - Install directory
     esac
 done
 
