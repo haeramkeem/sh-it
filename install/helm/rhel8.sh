@@ -4,7 +4,6 @@
 VER="v3.9.1"
 OS="linux"
 ARCH="amd64"
-INSTALL_DIR="/usr/local/bin"
 
 # ARGs
 while getopts 'v:o:a:' opt; do
@@ -19,8 +18,13 @@ done
 # Install
 curl -L https://get.helm.sh/helm-$VER-$OS-$ARCH.tar.gz -o helm.tar.gz
 tar -xzvf helm.tar.gz
-sudo mv $OS-$ARCH/helm $INSTALL_DIR/helm
-sudo ln -s $INSTALL_DIR/helm /usr/bin/helm
+sudo cp -v $OS-$ARCH/helm /usr/local/bin/helm
+sudo ln -s /usr/local/bin/helm /usr/bin/helm
+
+# Additional install path
+if [[ -z "$INSTALL_DIR" ]]; then
+    cp -v $OS-$ARCH/helm $INSTALL_DIR/helm
+fi
 
 # Clean up
 rm -rf helm.tar.gz
