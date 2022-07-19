@@ -6,7 +6,7 @@ OS="linux"
 ARCH="amd64"
 
 # ARGs
-while getopts 'v:o:a:' opt; do
+while getopts 'v:o:a:i:' opt; do
     case "$opt" in
         v) VER=${OPTARG} ;;                 # (OPTIONAL) - Helm version
         o) OS=${OPTARG} ;;                  # (OPTIONAL) - OS name
@@ -22,7 +22,7 @@ sudo cp -v $OS-$ARCH/helm /usr/local/bin/helm
 sudo ln -s /usr/local/bin/helm /usr/bin/helm
 
 # Additional install path
-if [[ -z "$INSTALL_DIR" ]]; then
+if [[ -n "$INSTALL_DIR" ]]; then
     cp -v $OS-$ARCH/helm $INSTALL_DIR/helm
 fi
 
