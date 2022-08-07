@@ -4,7 +4,7 @@ function init-mvn {
     local APPNAME=$1
 
     mvn archetype:generate \
-        -DgroupId=com.$APPNAME.app \
+        -DgroupId=$APPNAME \
         -DartifactId=$APPNAME \
         -DarchetypeArtifactId=maven-archetype-quickstart \
         -DarchetypeVersion=1.4 \
