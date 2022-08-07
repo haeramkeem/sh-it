@@ -3,6 +3,11 @@
 function exec_sql {
     SQL="$(cat -)"
 
+    if [ -z "$CONTAINER_NAME" ]; then
+        echo "Abort: CONTAINER_NAME not provided as env" 1>&2
+        exit 1
+    fi
+
     if [ -z "$DB_USERNAME" ]; then
         echo "Abort: DB_USERNAME not provided as env" 1>&2
         exit 1
@@ -23,7 +28,8 @@ function exec_sql {
         exit 1
     fi
 
-    docker exec mariadb \
+    docker exec $CONTAINER_NAME \
         mysql -u$DB_USERNAME -p$DB_PASSWORD $DB_DATABASE -e "$SQL" \
-        && echo $SQL
+        && echo 'Successfully executed:'
+    echo $SQL
 }
