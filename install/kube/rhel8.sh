@@ -15,7 +15,7 @@ sudo yum install -y epel-release
 # -------------------------
 # Install containerd if not installed
 if ! `ctr --version &> /dev/null`; then
-    bash <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/install/rhel8/docker.sh) -c
+    bash <(curl -sL https://raw.githubusercontent.com/haeramkeem/sh-it/main/install/docker/rhel8.sh)
 fi
 
 # Configurations
