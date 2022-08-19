@@ -52,7 +52,7 @@ exclude=kubelet kubeadm kubectl
 EOF
 
 # Install Kubelet, Kubeadm, Kubectl
-sudo yum install -y kubelet$VER kubeadm$VER kubectl$VER --disableexcludes=kubernetes
+sudo yum install -y kubelet$VER kubeadm$VER --disableexcludes=kubernetes
 sudo systemctl enable --now kubelet
 
 # Configurations
@@ -81,7 +81,7 @@ sudo systemctl restart kubelet
 # Post installation
 echo ""
 echo ""
-echo "# Installing Kubelet, Kubeadm and Kubectl done"
+echo "# Installing Kubelet and Kubeadm done"
 echo "# As this installation script doesn't cover initiating the K8s cluster,"
 echo "# you have to initiate it manually"
 echo "# Recommended post-installation script:"
