@@ -126,6 +126,18 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Locale settings
-export LANG=C
-export LANGUAGE=C
-export LC_ALL=C
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Kubectl auto-completion
+source <(kubectl completion zsh)
+
+# Kube-ps1
+source "$(brew --prefix)/opt/kube-ps1/share/kube-ps1.sh"
+PS1='$(kube_ps1)'$PS1
+KUBE_PS1_PREFIX="\n("
+KUBE_PS1_SYMBOL_COLOR="gray"
+KUBE_PS1_CTX_COLOR="green"
+
+# Kubectl --context
+alias kubectx='kubectl --context'
