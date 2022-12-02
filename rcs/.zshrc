@@ -141,3 +141,6 @@ KUBE_PS1_CTX_COLOR="green"
 
 # Kubectl --context
 alias kubectx='kubectl --context'
+
+# Calm down mate
+alias fuck='echo "fuck all of ya"'
