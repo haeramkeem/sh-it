@@ -144,3 +144,6 @@ alias kubectx='kubectl --context'
 
 # Calm down mate
 alias fuck='echo "fuck all of ya"'
+
+# Git hacks
+alias git-cur='git rev-parse --abbrev-ref HEAD'
