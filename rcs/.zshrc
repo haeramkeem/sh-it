@@ -146,4 +146,11 @@ alias kubectx='kubectl --context'
 alias fuck='echo "fuck all of ya"'
 
 # Git hacks
+## Get current branch (CURrent)
 alias git-cur='git rev-parse --abbrev-ref HEAD'
+## Set branch state (SetState)
+git-ss() {
+    local STATE=$1
+    local BRANCH=$2
+    git branch -m $BRANCH $STATE/$BRANCH
+}
