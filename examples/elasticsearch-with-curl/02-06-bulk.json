@@ -1,0 +1,9 @@
+{"index": {"_index": "foods", "_id": "3"}}
+{"menu": "soju", "price": "2$"}
+{"index": {"_index": "foods", "_id": "4"}}
+{"menu": "korean-barbeque", "price": "20$"}
+{"create": {"_index": "foods", "_id": "5"}}
+{"menu": "pajeon", "price": "20$"}
+{"update": {"_index": "foods", "_id": "4"}}
+{"doc": {"price": "20$"}}
+{"delete": {"_index": "foods", "_id": "5"}}
