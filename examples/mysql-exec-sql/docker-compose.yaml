@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  mariadb:
+    container_name: ${CONTAINER_NAME}
+    image: mariadb:10.8.2-rc-focal
+    volumes:
+      - mrdata:/var/lib/mysql
+    environment:
+      - "MARIADB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+      - "MARIADB_USER=${DB_USERNAME}"
+      - "MARIADB_PASSWORD=${DB_PASSWORD}"
+      - "MARIADB_DATABASE=${DB_DATABASE}"
+    ports:
+      - ${DB_PORT}:3306
+volumes:
+  mrdata:
