@@ -1,0 +1,6 @@
+#!/bin/bash
+
+act \
+    -j $GH_ACTION_JOB_NAME \
+    -s AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
+    -s AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
