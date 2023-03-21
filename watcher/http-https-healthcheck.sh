@@ -1,8 +1,6 @@
 #!/bin/bash
 
 ENDPOINTS=""
-CONN_MSG="CONN"
-FAIL_MSG="FAIL"
 
 while getopts "e:" opt; do
     case $opt in
@@ -16,11 +14,24 @@ while getopts "e:" opt; do
     esac
 done
 
+function tcpcheck() {
+    local ip=$1
+    local port=$2
+    local CONN_MSG="CONN"
+    local FAIL_MSG="FAIL"
+
+    if `nc -z $ip $port &> /dev/null`; then
+        echo -n $CONN_MSG
+    else
+        echo -n $FAIL_MSG
+    fi
+}
+
 echo "HTTP | HTTPS | ENDPOINT"
 echo "-----|-------|---------"
 for e in $ENDPOINTS; do
-    nc -z $e 80 &>/dev/null && echo -n $CONN_MSG || echo -n $FAIL_MSG
+    tcpcheck $e 80
     printf " | "
-    nc -z $e 443 &>/dev/null && echo -n $CONN_MSG || echo -n $FAIL_MSG
+    tcpcheck $e 443
     printf "  | $e\n"
 done
