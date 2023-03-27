@@ -2,10 +2,15 @@
 
 CTX=""
 
-while getopts 'c:' opt; do
+while getopts 'c:h' opt; do
     case "$opt" in
         c)
             CTX=$OPTARG
+            ;;
+        h)
+            echo "REQUIRED ARGS:"
+            echo "-c \${kubectl context}"
+            exit 0
             ;;
         *)
             echo "Unknown option '$opt'" 1>&2; exit 1
