@@ -2,10 +2,15 @@
 
 ENDPOINTS=""
 
-while getopts "e:" opt; do
+while getopts "e:h" opt; do
     case $opt in
         e)
             ENDPOINTS=$(tr ',' ' ' <<< $OPTARG)
+            ;;
+        h)
+            echo "REQUIRED ARGS:"
+            echo "-e \${comma-separated endpoint list}"
+            exit 0
             ;;
         *)
             echo "Unknown option '$opt'" 1>&2
