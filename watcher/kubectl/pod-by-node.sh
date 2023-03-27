@@ -3,13 +3,19 @@
 NODE=""
 CTX=""
 
-while getopts 'c:n:' opt; do
+while getopts 'c:n:h' opt; do
     case "$opt" in
         n)
             NODE=$OPTARG
             ;;
         c)
             CTX=$OPTARG
+            ;;
+        h)
+            echo "REQUIRED ARGS:"
+            echo "-c \${kubectl context}"
+            echo "-n \${node name}"
+            exit 0
             ;;
         *)
             echo "Unknown option '$opt'" 1>&2; exit 1
