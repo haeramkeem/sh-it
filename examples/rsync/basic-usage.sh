@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rsync -av --progress $SRC $DST
+rsync -avhu --progress $SRC $DST
