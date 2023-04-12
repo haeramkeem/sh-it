@@ -13,7 +13,7 @@ fmt() {
     FNAME=$(rev <<< $f | cut -d '/' -f 1 | rev)
     FPATH=$(sed "s/$FNAME//g" <<< $f)
     MSG=$(sed 's/.sh//g' <<< $FNAME | sed 's/-/ /g')
-    git commit -m "$p: [${FPATH%/}] $MSG"
+    git commit -m "[${FPATH%/}] $p: $MSG"
 }
 
 # COMMIT untracked
