@@ -1,0 +1,5 @@
+# Mac OS
+.DS_Store
+
+# Temp file convention
+_*
