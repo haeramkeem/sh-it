@@ -15,6 +15,8 @@ while getopts 'c:wh' opt; do
             echo "REQUIRED ARGS:"
             echo "-c \${kubectl context}"
             echo "-n \${node name}"
+            echo "OPTIONAL ARGS:"
+            echo "-w same with '-o wide'"
             exit 0
             ;;
         *)
