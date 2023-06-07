@@ -19,7 +19,7 @@ while getopts "e:h" opt; do
     esac
 done
 
-function ipmpcheck() {
+function icmpcheck() {
     local ip=$1
     local CONN_MSG="CONN"
     local FAIL_MSG="FAIL"
@@ -47,7 +47,7 @@ function tcpcheck() {
 MARGIN="\t\t"
 printf "IP${MARGIN}80/TCP${MARGIN}443/TCP${MARGIN}ENDPOINT\n"
 for e in $ENDPOINTS; do
-    ipmpcheck $e
+    icmpcheck $e
     printf "$MARGIN"
 
     tcpcheck $e 80
