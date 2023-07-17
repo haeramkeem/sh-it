@@ -5,7 +5,7 @@ NS=""
 NAMESPACED="true"
 WIDE=""
 
-while getopts 'c:n:A' opt; do
+while getopts 'c:n:Ah' opt; do
     case "$opt" in
         c)
             CTX="--context=$OPTARG"
