@@ -2,14 +2,21 @@
 
 ENDPOINTS=""
 
+function helpme() {
+cat << EOF | column -t -s '|'
+ARG|VALUE|DESCRIPTION|REQUIRED|DEFAULT
+-e|comma-separated endpoint list|List of endpoints to check|True|
+-h| |Help|False|
+EOF
+}
+
 while getopts "e:h" opt; do
     case $opt in
         e)
             ENDPOINTS=$(tr ',' ' ' <<< $OPTARG)
             ;;
         h)
-            echo "REQUIRED ARGS:"
-            echo "-e \${comma-separated endpoint list}"
+            helpme
             exit 0
             ;;
         *)
@@ -18,6 +25,11 @@ while getopts "e:h" opt; do
             ;;
     esac
 done
+
+if [[ $ENDPOINTS == "" ]]; then
+    echo "Option '-e' required" 1>&2
+    exit 1
+fi
 
 function icmpcheck() {
     local ip=$1
