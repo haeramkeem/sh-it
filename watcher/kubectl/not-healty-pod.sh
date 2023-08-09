@@ -1,20 +1,32 @@
 #!/bin/bash
 
 CTX=""
-KOPT=""
+NS="-A"
+OUT=""
 
-while getopts 'c:hw' opt; do
+function helpme() {
+cat << EOF | column -t -s '|'
+ARG|VALUE|DESCRIPTION|REQUIRED|DEFAULT
+-c|kube-context|Kube context name|False|current context
+-n|namespace|Namespace name|False|all namespace
+-W| |Wide output|False|
+-h| |Help|False|
+EOF
+}
+
+while getopts 'c:n:Wh' opt; do
     case "$opt" in
         c)
-            CTX=$OPTARG
+            CTX="--context $OPTARG"
             ;;
-        w)
-            KOPT="$KOPT -owide"
+        n)
+            NS="--namespace $OPTARG"
+            ;;
+        W)
+            OUT="-o wide"
             ;;
         h)
-            echo "REQUIRED ARGS:"
-            echo "-c \${kubectl context}"
-            echo "-w (same as '-o wide')"
+            helpme
             exit 0
             ;;
         *)
@@ -23,9 +35,9 @@ while getopts 'c:hw' opt; do
     esac
 done
 
-CMD="kubectl --context $CTX get po -A $KOPT | grep -ivE 'running|completed'"
+CMD="kubectl $CTX get po $NS $OUT | grep -ivE 'running|completed'"
 
 CNT=$(bash -c "$CMD" | wc -l)
-printf "COUNT: $CNT\n\n"
+printf "COUNT: $(( $CNT - 1 ))\n\n"
 
 bash -c "$CMD"
