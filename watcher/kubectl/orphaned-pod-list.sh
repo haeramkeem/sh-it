@@ -31,7 +31,10 @@ while getopts 'c:n:h' opt; do
     esac
 done
 
-kubectl $CTX $NS get pod -o yaml \
-    | yq '.items.[].metadata | [{"name":.name,"ownerReferences":.ownerReferences}]' \
-    | grep null -B1 \
-    || echo "ORPHANED POD NOT FOUND"
+KUBE_CMD="kubectl $CTX $NS get pod -o yaml"
+YQ_QUERY=".items.[] | select(.metadata.ownerReferences == null) | .metadata.name"
+if [[ "$(bash -c "$KUBE_CMD | yq '$YQ_QUERY' | wc -l | xargs")" != "0" ]]; then
+    bash -c "$KUBE_CMD | yq '$YQ_QUERY'"
+else
+    echo "Orphaned pod not found."
+fi
