@@ -25,10 +25,5 @@ DNS.0 = ${DOMAIN:=*.digicert.com}
 IP.0 = ${IP_ADDR:=45.60.125.229}
 EOF
 
-# Option 1) Create RSA, CSR and CRT separately
-## Step 1) Generate RSA:4096 privkey
-openssl genrsa -out tls.key 4096
-## Step 2) Generate CSR
-openssl req -new -key tls.key -out tls.csr -config tls.csr.conf
-## Step 3) Generate Cert
-openssl x509 -req -in tls.csr -out tls.crt -extensions v3_ext -extfile tls.csr.conf -days ${EXPIRATION_DAYZ}
+# Create keypair and certificate
+openssl req -x509 -new -nodes -newkey rsa:2048 -keyout ca.key -out ca.crt -config ca.cnf -days 365000 -set_serial 0
